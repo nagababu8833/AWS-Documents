@@ -1,0 +1,100 @@
+polices: permissions
+
+1. aws manged polices : iamfullaccess,iamreadonlyaccdess
+2. customer managed polices : own polices
+3. inline polices : a police which is specific to a particular user or group
+
+ s3fullaccess
+ s3readonlyaccess
+  
+
+ ec2fullaccess
+ ec2readonlyaccess 
+
+tasks:
+---------------------
+1. iam full access task
+2. iam deny full access task
+3. delete policy by user in group (he also delted from group)
+      .denyfullaccess
+      .allow full access
+4. police versions
+5.police generator (json code generator)
+---------------------------------
+
+
+In AWS Identity and Access Management (IAM), there are limits to the number of policies that can be 
+ attached to users, groups, and roles. Here's a breakdown:
+
+---
+
+### **IAM Group-Level Policy Limits**
+1. **Inline Policies**:
+   - You can attach up to **10 inline policies** directly to an IAM group.
+2. **Managed Policies**:
+   - You can attach up to **10 managed policies** to an IAM group.
+   - This includes both AWS-managed and customer-managed policies.
+
+---
+
+### **IAM User-Level Policy Limits**
+1. **Inline Policies**:
+   - You can attach up to **10 inline policies** directly to an IAM user.
+2. **Managed Policies**:
+   - You can attach up to **10 managed policies** to an IAM user.
+   - This includes AWS-managed and customer-managed policies.
+
+---
+
+### **Policy Size and Version Limits**
+- **Maximum Policy Document Size**:
+  - **6,144 characters** for inline policies.
+  - **20,480 characters** for managed policies (JSON structure, including whitespace).
+  
+- **Maximum Policy Versions**:
+  - Managed policies can retain up to **5 versions**. You can delete older versions to free up space.
+
+
+
+
+
+1. IAM Policy:
+======================
+An IAM policy is a JSON document that defines permissions for actions on AWS resources. 
+It specifies who (user, group, or role) can perform what actions (e.g., s3:GetObject) on which 
+resources (e.g., an S3 bucket) and under what conditions (e.g., from a specific IP range).
+
+Key Components of a Policy:
+----------------------
+Statements: The core of the policy, defining the permissions.
+Effect: Either Allow or Deny.
+Action: The AWS service actions (e.g., s3:GetObject, ec2:StartInstances).
+Resource: The AWS resources to which the actions apply (e.g., specific S3 buckets or EC2 instances).
+Condition (Optional): Additional constraints (e.g., based on IP address, MFA requirement).
+Types of Policies:
+
+Managed Policies:
+AWS-Managed: Predefined by AWS (e.g., AmazonS3ReadOnlyAccess).
+Customer-Managed: Created and managed by you for specific use cases.
+Inline Policies:
+
+Embedded directly into a specific IAM entity (user, group, or role).
+Specific to that entity and not reusable.
+
+
+
+2. IAM Role:
+===========================================
+  An IAM role is an AWS identity with specific permissions that can be assumed by trusted entities, 
+  such as AWS services, users, or applications, to perform tasks on their behalf.
+
+Key Features:
+-------------
+Temporary Credentials: Roles provide temporary security credentials.
+Assumption: Roles are assumed by entities, unlike users who have long-term credentials.
+Trust Relationship: Defines which entities can assume the role.
+Use Cases:
+AWS Service Access: Granting EC2 instances access to S3 without storing credentials.
+Cross-Account Access: Allowing users or services in one AWS account to access resources in another.
+Federated Access: Enabling single sign-on (SSO) for users outside AWS.
+Automation: Assigning roles to Lambda functions, ECS tasks, or other services for secure access to AWS resources.
