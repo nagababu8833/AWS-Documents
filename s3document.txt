@@ -1,0 +1,64 @@
+s3(simple storage service):  --cloud storage solution
+============================
+
+
+s3            ----- Bucket --objects(.pdf,.txt,.txt,.jpg,.mp4) ---5gb ---unlimited
+Google drive  ---Folder--Subfolder/files----15gb
+
+Google Drive:
+-----------
+viwer
+editor
+owner
+remove
+
+s3 storage clasess:
+---------------------
+1.standard class : default class ,pricing is high,at any time access, AZ>3
+2.standard IA:  storage class is less, cost is high for access AZ>3
+3.Intelligent Tiering :depend on usge , depend on access, how many time download, howmany time upload ,10gb
+4.onzone - IA : 1-AZ
+5.Glacier instant Retrieval :
+6.Glacier Flexible Retrieval (Glacier) : chepear cost
+7.Glacier Deep Archive : chepast cost
+8.Reduce Redundancy
+
+s3 glacier retrival types:
+------------------------------
+1.Expedited retrival --  1-5 minutes (250 Mb Data)
+2.Standard Retrival  --  3-5 hours 
+3.Bluck Retrival     --  5-12 hours 
+
+
+Aws monthly Calculator
+
+
+tasks :
+--------------------
+1.provide public access
+2.
+
+
+2010
+2011
+2012
+.
+.
+.2020
+.
+.
+2024  audit last five years
+
+storage
+requesting 
+retrival
+put/get/list
+copy/move
+
+
+compute --- running servers
+storage --- 8 gb
+
+
+
+cost is not only for storage
