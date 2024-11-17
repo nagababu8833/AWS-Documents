@@ -1,7 +1,6 @@
 s3(simple storage service):  --cloud storage solution
 ============================
 
-
 s3            ----- Bucket --objects(.pdf,.txt,.txt,.jpg,.mp4) ---5gb ---unlimited
 Google drive  ---Folder--Subfolder/files----15gb
 
@@ -62,3 +61,43 @@ storage --- 8 gb
 
 
 cost is not only for storage
+
+
+================================================    Day2 =============================================================================
+
+1.Snowball
+2.Sonwedge
+3.Snowmobile
+
+
+1.aws replication
+2.aws liefcycle
+3.Event notifications
+   
+tasks:
+-------------
+-->create snowball service
+
+1.create s3 buckets input,output different regions , disable versioning  
+2. open iam role after create / create floder afetr upload data to bucket
+3. disable the replication rule
+4. upload data to bucket
+5. create replication rule
+6. upload data to bucket
+7. delete data to bucket
+
+
+secure s3 buckets;
+------------------
+1. create iam roles 
+2. enable encryption
+3. object locking 
+4. block public access
+5. Aws Trusted advisor
+
+sns(simple notification service)
+================================
+1.Topic(name) 
+2.Subscprtion(link your mail id or mobile number)
+   -->  mail
+   ---> Sms
