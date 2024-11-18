@@ -1,0 +1,114 @@
+Networking Topic:
+Vpc(Virutual Private Cloud)
+----------------------------------
+
+new Project 
+aws account
+iam users
+networking configurations
+
+
+ip address 
+
+system/server/laptop/mobile....
+
+ip4 : xx.xx.xx.xx  34.54.65.78
+ip6 : xxx.xxx.xxx.xxx.xxx.xxx
+
+ip4 ---> 32 bit address
+ip6 ---> 128 bit address  
+
+ip6 format
+
+0-255:0-255:0-255:0-255
+
+0-000  -->2^2*0+2^1*0+2^0*0 = 0+0+0 0
+1-001  -->2^2*0+2^1*0+2^0*1 = 0+0+0 1
+2-010
+3-011
+4-100
+5-101
+6-110
+7-111
+
+8-1000
+
+
+
+class A
+class B
+class C
+class D
+class E
+
+
+0.0.0.0
+0.0.0.1
+0.0.0.2
+.
+.
+.
+.
+0.0.255.0
+
+0.0.1.0
+0.0.2.0
+.
+.
+.
+0.0.255.0
+.
+.
+.
+256*256*256*256
+65536*65536
+
+public ip -- unique
+private ip --
+
+
+1.1.1.0/24  : 32-24=8 --> 2^8=256 ip address we get
+
+========================================================================================================
+=========================================================================================================
+vpc - some range of ip address 
+subnet- subset of vpc
+
+
+Regions: mumbai, us-east-1
+avalability zones: us-east-1a, us-east-1b,1c
+
+vpc
+subnet
+internet gateway
+nat gateway 
+Route table
+
+
+security groups
+Nacl(network access control list)
+
+Nat gateway
+EIP
+
+public subnet
+private subnet 
+
+vpc peering
+-------------------------------------
+ec2 server ---default vpc -- default subnet
+
+batch7-vpc ---- 10.0.0.0/16
+batch7-subnet ---- 10.0.0.0/24
+batch7-igw
+main route table --- route(rules)
+	
+
+tasks:
+-----------------------------------------------
+1. create sample vpc , subnet, natgateway, route table and allow all traffic in route table
+
+
+
+
+
