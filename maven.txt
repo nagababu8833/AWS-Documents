@@ -1,0 +1,16 @@
+Scm:github, bitbucket, gitlab, aws code commit 
+build: preparing an executable file/Artificate(.war, .jar, .ear) :app-v1.jar, app-v2.jar
+
+
+build tolls : Ant, Maven, Ms Build, Gradle
+ci/cd tolls : jenkins, gitlab ci/cd
+
+
+ant: build the code
+maven: build the code + folder creation
+
+java:
+----------
+jre(Java runtime eneviroment)
+jdk(Java development kit)
+
