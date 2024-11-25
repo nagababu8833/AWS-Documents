@@ -90,6 +90,20 @@ tasks:
 13 Add timestamps to the Console Output
 
 
+14.build periodcally
+15.pole scm
+15.webwook trigger
+
+16. master-salve configuration
+
+Jenkins:
+-------------
+manual trigger
+build perdically (every hour)
+webhook trigger(linked with source code repo)
+pole scm(every hour,source code change in the repo)
+
+
 
 automatically stop ec2 servers & stop servers
 lambda service + cloud watch events + iam role + ec2server
