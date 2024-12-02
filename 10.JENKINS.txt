@@ -82,8 +82,8 @@ tasks:
 5. create credentail manager password (user1)
 6. delete user (employee leave origination)
 7. log rotation and check job location in cli
-8. change build number
-9. jenkins parameters
+8. change build number  --->/var/lib/jenkins/jobs/<job_name> --->vi nextBuildNumber
+9. jenkins parameters  -->
 10 .disable the jenkins job
 11. execute concurrent jobs
 12 Delete workspace before build starts
@@ -292,22 +292,4 @@ $ service sshd restart
 ~goto jenkins dashboard-->create project-->labeling:testing -->save and apply
 
 
-class-5:-
 
-AZURE DEVOPS:--
-~Google it as devops.azure.com and create an account with microsoft account credentials,its free of cost.
-~Create an organization,under that we can create projects as private.
-~Repos will work as github for that click on generate git credentials
-~create a folder in any drive and open cmd 
- $ git init
- $ git status
- $ touch f1 f2
- $ git add .
- $ git commit -m "firstcommit"
- $ git remote add origin htts://....
- $ git push -u origin --all -->it will ask for credentials of azuredevops
-~Then under commits we will see our firstcommit
-
-pipelines:--
-~To create a pipeline -->click on releases-->new pipeline-->select a template/create an empty job-->apply
-~for builds create a build pipeline.
