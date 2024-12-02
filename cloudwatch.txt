@@ -1,0 +1,30 @@
+cloudwatch:
+============
+
+Ec2 server: cpu,memory,diskspace,network in ,network out.
+Rds: db connections, free space,.....
+s3 bucket : total size, no of objects
+Asg: min, max, current, ......
+
+.
+.
+.
+.
+80%-90%
+
+1. dashboards
+2. metrics
+3. logs
+4. alarms
+5.events
+6.groups
+
+
+alaram:
+--------
+alaram--- whenever it meet the condition it is in alaram state.
+insufficent ----> it not 
+Ok ---> the alaram threshold value not reached (condition not statisified)
+
+
+yes > /dev/null &
