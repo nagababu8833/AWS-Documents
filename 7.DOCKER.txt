@@ -20,14 +20,20 @@ container
 2. multiple applications
 3. conatiner engine(docker, mesos, kubermetes.......)
 
+1. Docker Image: A lightweight, standalone, and executable package containing all the necessary code, libraries, and dependencies 
+                 to run an application.
+
+2.Docker Container: A runtime instance of a Docker image that runs as an isolated and portable environment on your system.
+
+
 Ondemand     -------   Laptop/desktop ----  (windows 10/linux)
 AWS/azure    -------   EC2/VM         ----   AMI(Ubuntu/Redhat)
 docker       -------   container     ---   image
 
 
 
-monolitic architecture 
-micro service architecture
+monolitic architecture (vm's)
+micro service architecture (containers)
 
 3-tier architecture
 ===========================
@@ -82,12 +88,17 @@ $ docker container ls -aq -->to list only cids of all containers
 $ docker attach containerid
           (OR)            ===>To go to inside a container
 $docker exec -it cid bash  
- 
+
+$ sudo apt-get install  
 $ Service nginx status      -->to know status of nginx
 $ Service nginx start       -->to start nginx
 ~ Hit the public ip in browser then nginx page opens
 ~ exit --> to escape from inside container (container is stopped)
 ~ Ctrl+pq                   -->to escape from inside conatiner(ctrl+pq ==>container is not stopped)
+
+$ docker pull nginx
+$ docker images 
+$ 
 $ docker stop containerid  -->to stop containers
 $ docker rm containerid     -->to remove containers
 
