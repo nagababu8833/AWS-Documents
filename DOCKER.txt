@@ -1,10 +1,10 @@
 
-DOCKER:-
+docker:-
 
-~ Docker is a company name
+~ docker is a company name
 ~ Container orchestration tools:
  1.Kubernetes,
- 2.Docker Swarm 
+ 2.docker Swarm 
  3.Aws ECS/EKS, 
  4.Mesos....
 
@@ -20,11 +20,33 @@ container
 2. multiple applications
 3. conatiner engine(docker, mesos, kubermetes.......)
 
+1. Docker Image: A lightweight, standalone, and executable package containing all the necessary code, libraries, and dependencies 
+                 to run an application.
+
+2.Docker Container: A runtime instance of a Docker image that runs as an isolated and portable environment on your system.
+
+
 Ondemand     -------   Laptop/desktop ----  (windows 10/linux)
 AWS/azure    -------   EC2/VM         ----   AMI(Ubuntu/Redhat)
-Docker       -------   container     ---   image
+docker       -------   container     ---   image
 
-Docker installation :
+
+
+monolitic architecture (vm's)
+micro service architecture (containers)
+
+3-tier architecture
+===========================
+1.user interface(frontend)
+2.middleware (business logic)
+3.database
+
+1.mobile wallet : one micro service 
+2.movie ticket : one micro service  ---> container stopped
+3.bill payment : one micro service
+
+
+docker installation :
 =========================================
 ~ Launch an ubuntu machine and connect to it and follow below steps.
 
@@ -32,9 +54,9 @@ For remove:
 ---------
 $ sudo apt-get remove docker docker-engine docker.io -->to uninstall old versions of docker
 
-For delete:
+For installation:
 -------------
-# Add Docker's official GPG key:
+# Add docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -48,6 +70,12 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 
+-----------------------------------------------
+sudo usermod -aG docker ubuntu
+newgrp docker
+sudo chmod 777 /var/run/docker.sock
+cat /etc/group | grep docker
+---------------------------------------------
 $ sudo apt-get install docker-ce ==>to install docker
 
 $ docker --version --> to know version
@@ -55,56 +83,67 @@ $ docker ps  (OR)  # docker container ls -all --> To list containers
 $ docker container ls -aq -->to list only cids of all containers
 
 
-Tags creation:
-========================
-$ docker tag ubuntu:latest username/sampleapp ---->create a Docker Tag
-$ docker push username/sampleapp
 
-~ Create a dockerhub account and create a repository and search for nginx
-$ Docker pull nginx
-$ Docker images (or) Docker image ls-->to list docker images then nginx will displays.
-$ Ifconfig -->will shows docker0
-$ docker run -it -p 80:80 nginx:latest /bin/bash -->To run a container
-~ Inside a docker container most of common commands are not work like config
-$ apt-get install net-tools --> to work ifconfig command
 
 $ docker attach containerid
           (OR)            ===>To go to inside a container
 $docker exec -it cid bash  
- 
+
+$ sudo apt-get install  
 $ Service nginx status      -->to know status of nginx
 $ Service nginx start       -->to start nginx
 ~ Hit the public ip in browser then nginx page opens
 ~ exit --> to escape from inside container (container is stopped)
 ~ Ctrl+pq                   -->to escape from inside conatiner(ctrl+pq ==>container is not stopped)
-$ Docker stop containerid  -->to stop containers
-$ Docker rm containerid     -->to remove containers
 
-$ Docker rmi imageid        -->to remove images
+$ docker pull nginx
+$ docker images 
+$ 
+$ docker stop containerid  -->to stop containers
+$ docker rm containerid     -->to remove containers
+
+$ docker rmi imageid        -->to remove images
        (docker rmi -f <image_id> or docker image prune)
 
-$ Docker ps                 -->shows only running containers
-$ Docker ps -a              -->stopped containers also appears
-$ Docker stop $(docker ps -aq) -->to stop all containsers at a time
-$ Docker rm $(docker ps -aq)-->delete all containers and data
-$ Docker ps -a              -->nothing displayed here.
+$ docker ps                 -->shows only running containers
+$ docker ps -a              -->stopped containers also appears
+$ docker stop $(docker ps -aq) -->to stop all containsers at a time
+$ docker rm $(docker ps -aq)-->delete all containers and data
+$ docker ps -a              -->nothing displayed here.
 
 9/10/18:-https://s3.amazonaws.com/devopsstate/dockerinstall.sh
 
-$ Docker search ubuntu
-$ Docker pull ubuntu:latest
-$ Docker images
-$ Docker run --rm -it --name=ubuntuout --hostname=ubuntuin -p 8080:80 ubuntu:latest bash
-$ Docker exec -it Cid bash -->to go in side container
+$ docker search ubuntu
+$ docker pull ubuntu:latest
+$ docker images
+$ docker run --rm -it --name=ubuntuout --hostname=ubuntuin -p 8080:80 ubuntu:latest bash
+$ docker exec -it Cid bash -->to go in side container
 
 $ Apt-get install net-tools -y -->to work  ifconfig cmd in ubuntu
 $ Apt-get install iputils-ping -->to work ping
 $ Apt-get install nano tree -y -->to work nano,tree cmds in ubuntu
 
-$ Docker commit cid repositoryname/tag -->to create new image
-$ Docker images
-$ Docker login -->enter username and passwd
-$ Docker push reponame/tag -->to push an image to dockerhub(docker push 690690/devops-1)(docker push 690690/devops-1:v1)
+Tags creation:
+========================
+$ docker tag ubuntu:latest username/sampleapp ---->create a docker Tag
+$ docker push username/sampleapp
+
+~ Create a dockerhub account and create a repository and search for nginx
+$ docker pull nginx
+$ docker images (or) docker image ls-->to list docker images then nginx will displays.
+$ Ifconfig -->will shows docker0
+$ docker run -it -p 80:80 nginx:latest /bin/bash -->To run a container
+~ Inside a docker container most of common commands are not work like config
+$ apt-get install net-tools --> to work ifconfig command
+
+
+
+----------------------------------------------------------------------------------------
+
+$ docker commit cid repositoryname/tag -->to create new image
+$ docker images
+$ docker login -->enter username and passwd
+$ docker push reponame/tag -->to push an image to dockerhub(docker push 690690/devops-1)(docker push 690690/devops-1:v1)
 ~ Check in dockerhub that push
 
 $ Apt-get install apache2 -y -->to install apache2
@@ -127,47 +166,47 @@ $ docker image prune -a -f
 
 Delete All Images:
 -------------------
-To delete all Docker images, use:
+To delete all docker images, use:
 
 $ docker rmi $(docker images -q)
 
 
-$ Docker inspect cid -->to know all detailed information about container
+$ docker inspect cid -->to know all detailed information about container
 $ Alias cls=clear     -->cls gives same o/p as clear
-$ Docker ps           -->displays list of containers with some details
-$ Docker ps -aq       -->displays only list of cid's
-$ Docker stop $(docker ps -aq) -->which stops all containers at a time
-$ Docker rm $(docker ps -aq) -->which deletes all containers at a time
+$ docker ps           -->displays list of containers with some details
+$ docker ps -aq       -->displays only list of cid's
+$ docker stop $(docker ps -aq) -->which stops all containers at a time
+$ docker rm $(docker ps -aq) -->which deletes all containers at a time
 $ Ifconfig 
-$ Docker network ls -->
+$ docker network ls -->
 
 @google==>docker network create
-$ Docker network create --driver=bridge --subnet=192.168.0.0/16 network192
-$ Docker network ls -->to list networks
-$ Docker network inspect networkname -->details about network
-$ Docker run --rm -it --name=ubuntu192 --network=network192 -p 8080:80 690690/nginx:2 bash
+$ docker network create --driver=bridge --subnet=192.168.0.0/16 network192
+$ docker network ls -->to list networks
+$ docker network inspect networkname -->details about network
+$ docker run --rm -it --name=ubuntu192 --network=network192 -p 8080:80 690690/nginx:2 bash
 
 
 volumes:-
-$ Docker volume create vol1 -->to create a volume
-$ Docker volume ls -->to list volumes
-$ Docker volume inspect vol1 -->to know all details about vol1
-$ Docker run --rm -it -v vol1:/tmp/data repo/tag:1 bash
+$ docker volume create vol1 -->to create a volume
+$ docker volume ls -->to list volumes
+$ docker volume inspect vol1 -->to know all details about vol1
+$ docker run --rm -it -v vol1:/tmp/data repo/tag:1 bash
 $ Cd /tmp/data/
 $ df -h -->
 $ nano file1
 $ cp file1 file2
 $ cp file1 file3
-$ Docker run --rm -dit -v vol1:/tmp/data repo/tag:1 bash
+$ docker run --rm -dit -v vol1:/tmp/data repo/tag:1 bash
 $ ls
-$ Docker exec -it cid ls /tmp/data -->attach to container and displays files
+$ docker exec -it cid ls /tmp/data -->attach to container and displays files
 $ ll path -->to list files in a specified path
-$ Docker volume rm vol1 -->to remove volume
+$ docker volume rm vol1 -->to remove volume
 ~ If the containers delete also the volume data will remain in the path.
-$ Docker rmi $(docker images) -f -->to remove all images at a time
+$ docker rmi $(docker images) -f -->to remove all images at a time
 
 10/10/18:-
-DOCKER FILES:-This is used to automate the creation of images and push these images to dockerhub
+docker FILES:-This is used to automate the creation of images and push these images to dockerhub
 
 FROM ubuntu:latest
 MAINTAINER PHANI (PHANI@domain.com)
@@ -185,7 +224,7 @@ CMD ["www.google.com"]
 ~create a dockerfile
 $ mkdir dfiles
 $ cd dfiles
-$ nano Dockerfile
+$ nano dockerfile
   
   FROM ubuntu:latest -->to pull ubuntu latest from dockerhub
   RUN apt-get update -->to update
@@ -223,7 +262,7 @@ Use ADD for downloading remote resources, extracting TAR files, etc..
 
 
 12/10/18:-
-DOCKER COMPOSE:-
+docker COMPOSE:-
 ~It is used to run containers automatically
 
 google -->github.com/docker/compose/releases
@@ -244,7 +283,7 @@ ctrl+insert -->to copy content from play with docker
 ctrl+shift+insert -->to paste content
 
 13/10/18:-
-DOCKER SWARM:-
+docker SWARM:-
 ~If we use only one host with docker containers,if any case it fail then the application will not work.
 ~By using swarm we can overcome this by maintaining more than one host.
 google-->play with docker-->start 4 instances
@@ -479,29 +518,29 @@ google:-
 ==========================================================
 ===========================================================
 
-## List Docker CLI commands
+## List docker CLI commands
 docker
 docker container --help
 
-## Display Docker version and info
+## Display docker version and info
 docker --version
 docker version
 docker info
 
-## Execute Docker image
+## Execute docker image
 docker run hello-world
 
-## List Docker images
+## List docker images
 docker image ls
 
-## List Docker containers (running, all, all in quiet mode)
+## List docker containers (running, all, all in quiet mode)
 docker container ls
 docker container ls --all
 docker container ls -aq
 
 ----------------------------------------------------
 
-docker build -t friendlyhello .  # Create image using this directory's Dockerfile
+docker build -t friendlyhello .  # Create image using this directory's dockerfile
 docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
 docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
 docker container ls                                # List all running containers
@@ -513,7 +552,7 @@ docker container rm $(docker container ls -a -q)         # Remove all containers
 docker image ls -a                             # List all images on this machine
 docker image rm <image id>            # Remove specified image from this machine
 docker image rm $(docker image ls -a -q)   # Remove all images from this machine
-docker login             # Log in this CLI session using your Docker credentials
+docker login             # Log in this CLI session using your docker credentials
 docker tag <image> username/repository:tag  # Tag <image> for upload to registry
 docker push username/repository:tag            # Upload tagged image to registry
 docker run username/repository:tag                   # Run image from a registry
