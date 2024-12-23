@@ -111,7 +111,6 @@ $ docker stop $(docker ps -aq) -->to stop all containsers at a time
 $ docker rm $(docker ps -aq)-->delete all containers and data
 $ docker ps -a              -->nothing displayed here.
 
-9/10/18:-https://s3.amazonaws.com/devopsstate/dockerinstall.sh
 
 $ docker search ubuntu
 $ docker pull ubuntu:latest
@@ -119,40 +118,26 @@ $ docker images
 $ docker run --rm -it --name=ubuntuout --hostname=ubuntuin -p 8080:80 ubuntu:latest bash
 $ docker exec -it Cid bash -->to go in side container
 
-$ Apt-get install net-tools -y -->to work  ifconfig cmd in ubuntu
-$ Apt-get install iputils-ping -->to work ping
-$ Apt-get install nano tree -y -->to work nano,tree cmds in ubuntu
-
-Tags creation:
-========================
-$ docker tag ubuntu:latest username/sampleapp ---->create a docker Tag
-$ docker push username/sampleapp
-
-~ Create a dockerhub account and create a repository and search for nginx
-$ docker pull nginx
-$ docker images (or) docker image ls-->to list docker images then nginx will displays.
-$ Ifconfig -->will shows docker0
-$ docker run -it -p 80:80 nginx:latest /bin/bash -->To run a container
-~ Inside a docker container most of common commands are not work like config
-$ apt-get install net-tools --> to work ifconfig command
+$ apt-get install net-tools -y -->to work  ifconfig cmd in ubuntu
+$ apt-get install iputils-ping -->to work ping
+$ apt-get install nano tree -y -->to work nano,tree cmds in ubuntu
 
 
+$ docker inspect cid -->to know all detailed information about container
+$ Alias cls=clear     -->cls gives same o/p as clear
+$ docker ps           -->displays list of containers with some details
+$ docker ps -aq       -->displays only list of cid's
+$ docker stop $(docker ps -aq) -->which stops all containers at a time
+$ docker rm $(docker ps -aq) -->which deletes all containers at a time
+$ Ifconfig 
 
-----------------------------------------------------------------------------------------
+Delete All Images:
+-------------------
+To delete all docker images, use:
 
-$ docker commit cid repositoryname/tag -->to create new image
-$ docker images
-$ docker login -->enter username and passwd
-$ docker push reponame/tag -->to push an image to dockerhub(docker push 690690/devops-1)(docker push 690690/devops-1:v1)
-~ Check in dockerhub that push
+$ docker rmi $(docker images -q)
 
-$ Apt-get install apache2 -y -->to install apache2
-$ Service apache2 status
-$ Service apache2 start 
-
-
-
- Delete All Unused Images:
+Delete All Unused Images:
 ================================
 
 You can clean up all dangling (unused) images using:
@@ -164,35 +149,106 @@ $ docker image prune -a
 Add the -f flag to skip confirmation prompts:
 $ docker image prune -a -f
 
-Delete All Images:
--------------------
-To delete all docker images, use:
 
-$ docker rmi $(docker images -q)
+docker nginx create multiple ports:
+====================================
+$ docker run -it -p 80:80 nginx:latest /bin/bash -->To run a container
+~ Inside a docker container most of common commands are not work like config
+$ apt-get install net-tools --> to work ifconfig command
+
+$  docker run -it -p 90:80 nginx:latest /bin/bash  --->allow 90 port under custom TCP
+
+--> past public ip with 90 and 80 port and change content of nginx file 
+---> for that we need to go web root -- /usr/share/nginx/html
+--> getting output form two containers
 
 
-$ docker inspect cid -->to know all detailed information about container
-$ Alias cls=clear     -->cls gives same o/p as clear
-$ docker ps           -->displays list of containers with some details
-$ docker ps -aq       -->displays only list of cid's
-$ docker stop $(docker ps -aq) -->which stops all containers at a time
-$ docker rm $(docker ps -aq) -->which deletes all containers at a time
-$ Ifconfig 
-$ docker network ls -->
+------------------Topics -------------------------
+1. docker Network
+2. docker volume 
+3. docker file
+4. docker compose
+5. docker swarm
+6. docker tags
 
-@google==>docker network create
+-------------------------------------------------
+
+
+Docker Network :
+==========================
+
+network types :
+1.Bridge Network
+2.Host network
+3.None
+
+
+$ docker network ls --> to see the list of networks
+$ docker network help
+$ docker inspect cid
 $ docker network create --driver=bridge --subnet=192.168.0.0/16 network192
 $ docker network ls -->to list networks
 $ docker network inspect networkname -->details about network
-$ docker run --rm -it --name=ubuntu192 --network=network192 -p 8080:80 690690/nginx:2 bash
+$ docker run --rm -it --name=ubuntu192 --network=network192 -p 8080:80 nginx bash
+
+Tags creation:
+========================
+
+$ docker tag ubuntu:latest username/sampleapp ---->create a docker Tag
+$ docker push username/sampleapp
+$ docker login -u username -->enter username and passwd
+
+
+~ Create a dockerhub account and create a repository and search for nginx
+$ docker pull nginx
+$ docker images (or) docker image ls-->to list docker images then nginx will displays.
+$ Ifconfig -->will shows docker0
+
+$ docker commit cid repositoryname/tag -->to create new image
+$ docker push reponame/tag -->to push an image to dockerhub
+~ Check in dockerhub that push
+
+
+$ apt-get install apache2 -y -->to install apache2
+$ service apache2 status
+$ service apache2 start 
+
+
+
+
+### Docker Network Types :
+-------------------------------------
+
+1. Bridge Network:  
+   - Default network for containers on the same host.  
+   - Containers can communicate using private IPs.  
+   - Best for isolated, standalone applications.
+
+2. Host Network:  
+   - Shares the host's network stack with containers.  
+   - No isolation, but offers high performance.  
+   - Ideal for low-latency applications.
+
+3. Overlay Network:  
+   - Enables container communication across multiple hosts.  
+   - Used in Docker Swarm or orchestration setups.  
+   - Provides secure, encrypted communication.
+
+4. None Network:  
+   - No network interface for the container.  
+   - Used for security-critical tasks.  
+   - Ensures complete network isolation.
 
 
 volumes:-
+=========
+A Docker volume is a persistent storage mechanism that allows 
+data to be stored outside the container's filesystem, enabling data sharing and persistence across container lifecycles.
 $ docker volume create vol1 -->to create a volume
 $ docker volume ls -->to list volumes
 $ docker volume inspect vol1 -->to know all details about vol1
 $ docker run --rm -it -v vol1:/tmp/data repo/tag:1 bash
-$ Cd /tmp/data/
+$ cd /tmp/data/
 $ df -h -->
 $ nano file1
 $ cp file1 file2
@@ -205,7 +261,8 @@ $ docker volume rm vol1 -->to remove volume
 ~ If the containers delete also the volume data will remain in the path.
 $ docker rmi $(docker images) -f -->to remove all images at a time
 
-10/10/18:-
+docker files:
+===============
 docker FILES:-This is used to automate the creation of images and push these images to dockerhub
 
 FROM ubuntu:latest
