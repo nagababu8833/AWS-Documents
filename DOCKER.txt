@@ -209,12 +209,6 @@ $ docker push reponame/tag -->to push an image to dockerhub
 ~ Check in dockerhub that push
 
 
-$ apt-get install apache2 -y -->to install apache2
-$ service apache2 status
-$ service apache2 start 
-
-
-
 
 ### Docker Network Types :
 -------------------------------------
@@ -240,14 +234,22 @@ $ service apache2 start
    - Ensures complete network isolation.
 
 
+$ apt-get install apache2 -y -->to install apache2
+$ service apache2 status
+$ service apache2 start 
+
+
+
 volumes:-
 =========
-A Docker volume is a persistent storage mechanism that allows 
-data to be stored outside the container's filesystem, enabling data sharing and persistence across container lifecycles.
+A Docker volume is a persistent storage mechanism that allows data to be stored outside the container's 
+filesystem, enabling data sharing and persistence across container lifecycles.
+
 $ docker volume create vol1 -->to create a volume
 $ docker volume ls -->to list volumes
 $ docker volume inspect vol1 -->to know all details about vol1
 $ docker run --rm -it -v vol1:/tmp/data repo/tag:1 bash
+$ docker run --rm -it -v batch7:/tmp/data nginx:latest bash
 $ cd /tmp/data/
 $ df -h -->
 $ nano file1
