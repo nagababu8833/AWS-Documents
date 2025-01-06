@@ -177,6 +177,14 @@ $  docker run -it -p 90:80 nginx:latest /bin/bash  --->allow 90 port under custo
 Docker Network :
 ==========================
 
+Commands:
+-----------
+List: docker network ls
+Create: docker network create <name>
+Inspect: docker network inspect <name>
+Connect: docker network connect <network> <container>
+Remove: docker network rm <name>
+
 network types :
 1.Bridge Network
 2.Host network
@@ -209,6 +217,10 @@ $ docker push reponame/tag -->to push an image to dockerhub
 ~ Check in dockerhub that push
 
 
+$ apt-get install apache2 -y -->to install apache2
+$ service apache2 status
+$ service apache2 start 
+
 
 ### Docker Network Types :
 -------------------------------------
@@ -217,51 +229,57 @@ $ docker push reponame/tag -->to push an image to dockerhub
    - Default network for containers on the same host.  
    - Containers can communicate using private IPs.  
    - Best for isolated, standalone applications.
-
+    
+    ex: docker pull httpd
+        docker run -d --name httpd01 -p 8080:80 httpd
+        docker stop cid
+        
+ 	docker run -d --name nginx01 -p 8081:80 nginx 
+	
 2. Host Network:  
    - Shares the host's network stack with containers.  
    - No isolation, but offers high performance.  
    - Ideal for low-latency applications.
+     ex: docker run -d --name httpd02 --net host httpd
 
-3. Overlay Network:  
+3. None Network:  
+   - No network interface for the container.  
+   - Used for security-critical tasks.  
+   - Ensures complete network isolation.
+   ex: docker run -d --name httpd02 --net host httpd
+
+
+4. Overlay Network:  
    - Enables container communication across multiple hosts.  
    - Used in Docker Swarm or orchestration setups.  
    - Provides secure, encrypted communication.
 
-4. None Network:  
-   - No network interface for the container.  
-   - Used for security-critical tasks.  
-   - Ensures complete network isolation.
-
-
-$ apt-get install apache2 -y -->to install apache2
-$ service apache2 status
-$ service apache2 start 
-
-
 
 volumes:-
 =========
-A Docker volume is a persistent storage mechanism that allows data to be stored outside the container's 
-filesystem, enabling data sharing and persistence across container lifecycles.
-
+A Docker volume is a persistent storage mechanism that allows 
+data to be stored outside the container's filesystem, enabling data sharing and persistence across container lifecycles.
 $ docker volume create vol1 -->to create a volume
 $ docker volume ls -->to list volumes
 $ docker volume inspect vol1 -->to know all details about vol1
-$ docker run --rm -it -v vol1:/tmp/data repo/tag:1 bash
-$ docker run --rm -it -v batch7:/tmp/data nginx:latest bash
+$ docker run --rm -it -v vol1:/tmp/data nginx bash
 $ cd /tmp/data/
 $ df -h -->
 $ nano file1
 $ cp file1 file2
 $ cp file1 file3
-$ docker run --rm -dit -v vol1:/tmp/data repo/tag:1 bash
+$ docker run --rm -dit -v vol1:/tmp/data nginx bash
 $ ls
 $ docker exec -it cid ls /tmp/data -->attach to container and displays files
 $ ll path -->to list files in a specified path
 $ docker volume rm vol1 -->to remove volume
 ~ If the containers delete also the volume data will remain in the path.
 $ docker rmi $(docker images) -f -->to remove all images at a time
+
+
+Docker file:to automate the creation of images
+docker compose: to automate the creation of containers and networks and volumes.
+docker swarm:
 
 docker files:
 ===============
@@ -320,7 +338,6 @@ Use COPY for simply copying files and/or directories into the build context.
 Use ADD for downloading remote resources, extracting TAR files, etc..
 
 
-12/10/18:-
 docker COMPOSE:-
 ~It is used to run containers automatically
 
@@ -341,7 +358,7 @@ google-->play with docker -->it is a instance lab of free for 4 hours,here we ca
 ctrl+insert -->to copy content from play with docker
 ctrl+shift+insert -->to paste content
 
-13/10/18:-
+
 docker SWARM:-
 ~If we use only one host with docker containers,if any case it fail then the application will not work.
 ~By using swarm we can overcome this by maintaining more than one host.
